@@ -95,6 +95,12 @@
       "relation": "oneToMany",
       "target": "api::address.address",
       "mappedBy": "user"
+    },
+    "myVehicles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::my-vehicle.my-vehicle",
+      "mappedBy": "owner"
     }
   }
 }
