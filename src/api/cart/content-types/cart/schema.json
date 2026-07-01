@@ -47,6 +47,12 @@
       "relation": "oneToMany",
       "target": "api::cart-item.cart-item",
       "mappedBy": "cart"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "cart"
     }
   }
 }
