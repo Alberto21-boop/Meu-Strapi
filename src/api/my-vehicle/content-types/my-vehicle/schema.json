@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "my_vehicles",
+  "info": {
+    "singularName": "my-vehicle",
+    "pluralName": "my-vehicles",
+    "displayName": "MyVehicle"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nickname": {
+      "type": "string",
+      "required": true
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "manufacturer": {
+      "type": "string",
+      "required": true
+    },
+    "model": {
+      "type": "string",
+      "required": true
+    },
+    "year": {
+      "type": "integer",
+      "required": true
+    },
+    "engine": {
+      "type": "string"
+    },
+    "fuelType": {
+      "type": "enumeration",
+      "enum": [
+        "gasoline",
+        "ethanol",
+        "flex",
+        "diesel",
+        "electric",
+        "hybrid"
+      ]
+    },
+    "mileage": {
+      "type": "integer",
+      "required": true
+    },
+    "licensePlate": {
+      "type": "string"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

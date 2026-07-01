@@ -562,6 +562,45 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiMyVehicleMyVehicle extends Struct.CollectionTypeSchema {
+  collectionName: 'my_vehicles';
+  info: {
+    displayName: 'MyVehicle';
+    pluralName: 'my-vehicles';
+    singularName: 'my-vehicle';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    engine: Schema.Attribute.String;
+    fuelType: Schema.Attribute.Enumeration<
+      ['gasoline', 'ethanol', 'flex', 'diesel', 'electric', 'hybrid']
+    >;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    licensePlate: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::my-vehicle.my-vehicle'
+    > &
+      Schema.Attribute.Private;
+    manufacturer: Schema.Attribute.String & Schema.Attribute.Required;
+    mileage: Schema.Attribute.Integer & Schema.Attribute.Required;
+    model: Schema.Attribute.String & Schema.Attribute.Required;
+    nickname: Schema.Attribute.String & Schema.Attribute.Required;
+    photo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    year: Schema.Attribute.Integer & Schema.Attribute.Required;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -1156,6 +1195,7 @@ declare module '@strapi/strapi' {
       'api::brand.brand': ApiBrandBrand;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
+      'api::my-vehicle.my-vehicle': ApiMyVehicleMyVehicle;
       'api::product.product': ApiProductProduct;
       'api::vehicle.vehicle': ApiVehicleVehicle;
       'plugin::content-releases.release': PluginContentReleasesRelease;
