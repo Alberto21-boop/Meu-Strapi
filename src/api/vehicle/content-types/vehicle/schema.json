@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vehicles",
+  "info": {
+    "singularName": "vehicle",
+    "pluralName": "vehicles",
+    "displayName": "Vehicle"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "manufacturer": {
+      "type": "string",
+      "required": true
+    },
+    "model": {
+      "type": "string",
+      "required": true
+    },
+    "yearStart": {
+      "type": "integer",
+      "required": true
+    },
+    "yearEnd": {
+      "type": "integer"
+    },
+    "engine": {
+      "type": "string"
+    },
+    "fuelType": {
+      "type": "enumeration",
+      "enum": [
+        "gasoline",
+        "ethanol",
+        "flex",
+        "diesel",
+        "electric",
+        "hybrid"
+      ]
+    },
+    "isActive": {
+      "type": "boolean"
+    }
+  }
+}
