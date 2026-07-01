@@ -42,6 +42,18 @@
     },
     "isActive": {
       "type": "boolean"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "mappedBy": "vehicles"
+    },
+    "my_vehicles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::my-vehicle.my-vehicle",
+      "mappedBy": "vehicle"
     }
   }
 }

@@ -61,6 +61,12 @@
     "isActive": {
       "type": "boolean",
       "default": true
+    },
+    "vehicle": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::vehicle.vehicle",
+      "inversedBy": "my_vehicles"
     }
   }
 }

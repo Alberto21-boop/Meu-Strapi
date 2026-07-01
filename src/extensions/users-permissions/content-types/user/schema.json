@@ -89,6 +89,12 @@
     },
     "birthDate": {
       "type": "date"
+    },
+    "addresses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::address.address",
+      "mappedBy": "user"
     }
   }
 }
