@@ -469,6 +469,44 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiAddressAddress extends Struct.CollectionTypeSchema {
+  collectionName: 'addresses';
+  info: {
+    displayName: 'Address';
+    pluralName: 'addresses';
+    singularName: 'address';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    city: Schema.Attribute.String & Schema.Attribute.Required;
+    complement: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    isDefault: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::address.address'
+    > &
+      Schema.Attribute.Private;
+    neighborhood: Schema.Attribute.String & Schema.Attribute.Required;
+    number: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    recipientName: Schema.Attribute.String & Schema.Attribute.Required;
+    state: Schema.Attribute.String & Schema.Attribute.Required;
+    street: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    zipCode: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ApiBrandBrand extends Struct.CollectionTypeSchema {
   collectionName: 'brands';
   info: {
@@ -492,6 +530,74 @@ export interface ApiBrandBrand extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCartItemCartItem extends Struct.CollectionTypeSchema {
+  collectionName: 'cart_items';
+  info: {
+    displayName: 'CartItem';
+    pluralName: 'cart-items';
+    singularName: 'cart-item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    discount: Schema.Attribute.Decimal;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cart-item.cart-item'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    quantity: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<1>;
+    totalPrice: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    unitPrice: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCartCart extends Struct.CollectionTypeSchema {
+  collectionName: 'carts';
+  info: {
+    displayName: 'Cart';
+    pluralName: 'carts';
+    singularName: 'cart';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cartStatus: Schema.Attribute.Enumeration<
+      ['active', 'abandoned', 'converted']
+    > &
+      Schema.Attribute.Required;
+    couponCode: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    discount: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    expiresAt: Schema.Attribute.DateTime;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::cart.cart'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtotal: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    total: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1192,7 +1298,10 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::address.address': ApiAddressAddress;
       'api::brand.brand': ApiBrandBrand;
+      'api::cart-item.cart-item': ApiCartItemCartItem;
+      'api::cart.cart': ApiCartCart;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
       'api::my-vehicle.my-vehicle': ApiMyVehicleMyVehicle;

@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cart_items",
+  "info": {
+    "singularName": "cart-item",
+    "pluralName": "cart-items",
+    "displayName": "CartItem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "quantity": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    },
+    "unitPrice": {
+      "type": "decimal",
+      "required": true
+    },
+    "totalPrice": {
+      "type": "decimal",
+      "required": true
+    },
+    "discount": {
+      "type": "decimal"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
